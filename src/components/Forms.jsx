@@ -4,31 +4,46 @@ const Form = () => {
 
     const [email, setEmail] = useState(" ")
     const [emailError, setEmailError] = useState(false)
+    const [password, setPassword] = useState('')
+    const [passwordError, setPasswordError] = useState(false)
 
     const submitHandler = (e) => {
         e.preventDefault();
-        alert(email);
+    
+        if (email ===""|| !email.includes('@')){
+            setEmailError(true);
+            }
+        
+        if(password.length < 5 || password ==="") {
+            setPasswordError(true);
+            }
 
-        if(email!=="" && email.includes("@")){
-            alert(email);
-            setEmailError(false);
-        }else{
-        setEmailError(true)
-
+        if(emailError || passwordError){
+            alert(`Email: ${email}, Password: ${password}`)
+            }   
         }
         
-    }
 
     return(
         <form className="card card-body shadow m-5" onSubmit={submitHandler} >
             <h3 className="text-center"> Login</h3>
             <div className="mb3">
                 <label htmlFor="email">Email</label>
-                <input type="text" className="form-control"
+                <input type="text" className={`form-control ${emailError && 'border border-danger'}`}
                   name="email" id="email"
                     onChange={(e) => setEmail(e.target.value) }
                     value= {email} />
-                {emailError && <small className="text-danger"> Invalid Email</small>}
+                {emailError ? <small className="text-danger"> Invalid Email</small> : null }
+
+            </div> 
+
+            <div className="mb3">
+                <label htmlFor="password">Password</label>
+                <input type="text" className={`form-control ${passwordError && 'border border-danger'}`}
+                  name="password" id="password"
+                    onChange={(e) => setPassword(e.target.value) }
+                    value= {password} />
+                {passwordError ? <small className="text-danger"> Invalid Password</small> : null }
 
             </div>
 
