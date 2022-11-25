@@ -39,7 +39,7 @@ const passwordHandler = (e) => {
             <h3 className="text-center"> Login</h3>
             <div className="mb3">
                 <label htmlFor="email">Email</label>
-                <input type="text" className={`form-control ${emailError&&emailTouched && 'border border-danger'}`}
+                <input type="text" className={`form-control ${emailError&&emailTouched&& 'border border-danger'}`}
                   name="email" id="email"
                     onChange={emailHandler}
                     onBlur={()=> setEmailTouched(true)}
@@ -54,12 +54,14 @@ const passwordHandler = (e) => {
                 <input type="text" className={`form-control ${passwordError && 'border border-danger'}`}
                   name="password" id="password"
                     onChange={passwordHandler }
+                    onBlur={()=> setPasswordTouched(true)}
                     value= {password} />
-                {passwordError ? <small className="text-danger"> Invalid Password</small> : null }
+
+                {passwordError && passwordTouched&& <small className="text-danger"> Invalid Password</small> }
 
             </div>
 
-            <div className="text-cent">
+            <div className="text-center">
                 <button className="btn btn-warning">Login</button>
             </div>
         </form>
